@@ -57,6 +57,15 @@ const cmds = {
   run: async (args) => {
     console.assert(started, "Not started!");
 
+    const output = args.output ?? "flag";
+    if (output !== "flag") {
+      return {
+        seq: args.seq,
+        skipped: true,
+        message: `Unsupported output format: ${output}`,
+      };
+    }
+
     const testCase = args.case;
     let validate;
     try {
